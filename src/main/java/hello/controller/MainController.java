@@ -65,7 +65,9 @@ public class MainController {
             model.addAttribute("userInfo", userInfo);
 
             String message = "Hi " + principal.getName() //
-                    + "<br> You do not have permission to access this page!";
+ 
+                    + "<br> У Вас нет доступа к данной странице!";
+
             model.addAttribute("message", message);
 
         }

@@ -1,27 +1,21 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" type="text/css"
-      href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-<link rel="stylesheet" th:href="@{/css/main.css}"
-      href="../../css/main.css" />
-<title>Дача</title>
-</head>
+<th:block th:include="/page_parts/_head"></th:block>
+
 
 <body>
 
-    <th:block th:include="/_menu"></th:block>
+    <th:block th:include="/page_parts/_menu"></th:block>
 
     <div class="site-body container">
 
-        <h1>Login</h1>
-
+        <h1>Войти</h1>
         <!-- /login?error=true -->
         <div th:if="${#request.getParameter('error') == 'true'}"
              style="color:red;margin:10px 0px;">
-            Login Failed!!!<br />
-            Reason :
+            Вход не выполнен!!!<br />
+            Почему :
+
             <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
                   th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
                         Static summary
@@ -29,19 +23,20 @@
 
         </div>
 
-        <h3>Enter user name and password:</h3>
+        <h3>Введите имя пользователя и пароль:</h3>
         <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
             <table>
                 <tr>
-                    <td>User:</td>
+                    <td>Логин:</td>
                     <td><input type='text' name='username' value=''></td>
                 </tr>
                 <tr>
-                    <td>Password:</td>
+                    <td>Пароль:</td>
                     <td><input type='password' name='password' /></td>
                 </tr>
                 <tr>
-                    <td>Remember Me?</td>
+                    <td>Запомнить меня?</td>
+
                     <td><input type="checkbox" name="remember-me" /></td>
                 </tr>
                 <tr>
@@ -51,6 +46,6 @@
         </form>
     </div>
 </body>
-<th:block th:include="/_footer"></th:block>
+<th:block th:include="/page_parts/_footer"></th:block>
 
 </html>
