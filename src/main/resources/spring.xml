@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+        <property name="url" value="jdbc:oracle:thin:@//para-lab.ru:1521/lab.univer.omsk.su" />
+        <property name="username" value="AnnaS" />
+        <property name="password" value="1" />
+    </bean>
+
+    <!-- Hibernate 3 XML SessionFactory Bean definition-->
+    <!-- 	<bean id="hibernate3SessionFactory"
+            class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+            <property name="dataSource" ref="dataSource" />
+            <property name="mappingResources">
+                <list>
+                    <value>person.hbm.xml</value>
+                </list>
+            </property>
+            <property name="hibernateProperties">
+                <value>
+                    hibernate.dialect=org.hibernate.dialect.MySQLDialect
+                </value>
+            </property>
+        </bean> -->
+
+    <!-- Hibernate 3 Annotation SessionFactory Bean definition-->
+    <bean id="hibernate3AnnotatedSessionFactory"
+          class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="annotatedClasses">
+            <list>
+                <value>hello.model.Paper</value>
+                <value>hello.model.AppUser</value>
+                <value>hello.model.AppRole</value>
+                <value>hello.model.UserRole</value>
+                <value>hello.model.FilesUpload</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle8iDialect</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="paperDAO" class="hello.oracle.PaperDAOImpl">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean>
+
+    <bean id="appUserDAO" class="hello.oracle.AppUserDAOImpl">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean>
+
+    <bean id="appRoleDAO" class="hello.oracle.AppRoleDAOImpl">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean>
+
+    <bean id="userRoleDAO" class="hello.oracle.UserRoleDAOImpl">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean>
+
+    <bean id="fileUploadDao" class="hello.oracle.FilesUploadDAOImpl">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+    </bean>
+
+</beans>
