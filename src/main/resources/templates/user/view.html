@@ -1,15 +1,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css"
-          href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" th:href="@{/css/main.css}"
-          href="../../css/main.css" />
-    <title>Дача</title>
-</head>
+<th:block th:include="/page_parts/_head"></th:block>
+
 <body>
-<th:block th:include="/_menu"></th:block>
+<th:block th:include="/page_parts/_menu"></th:block>
 
 <div class="site-body container">
         <h3>Пользователи</h3>
@@ -21,9 +15,8 @@
             </tr>
         </table>
 </div>
-<script type="text/javascript"
-        src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
-<th:block th:include="/_footer"></th:block>
+<th:block th:include="/page_parts/_footer"></th:block>
 
 </html>
