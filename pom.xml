@@ -4,6 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>omsu</groupId>
+
     <artifactId>KTPH_ART</artifactId>
     <version>0.1.0</version>
 	<packaging>jar</packaging>
